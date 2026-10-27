@@ -1,4 +1,4 @@
-# Unpinned blobs from gta7litewifixx-user 14 UP1A.231005.007 T220XXSAEYE4 release-keys
+# Unpinned blobs from gta7litexx-user 14 UP1A.231005.007 T220XXSAEYE4 release-keys
 
 # AAL
 vendor/lib/libaal_key.so
@@ -1772,7 +1772,7 @@ vendor/lib64/vendor.mediatek.hardware.power@2.0.so
 # Radio
 vendor/bin/ccci_mdinit
 vendor/bin/ccci_rpcd
-vendor/bin/meta_tst
+-vendor/bin/meta_tst
 vendor/bin/rcs_volte_stack
 vendor/bin/stp_dump3
 vendor/bin/volte_clientapi_ua
@@ -1896,3 +1896,15 @@ vendor/lib64/libapmonitor_vendor.so
 vendor/lib64/libconnfem.so
 vendor/lib64/meta_wifi_data.so
 vendor/lib64/vendor.mediatek.hardware.apmonitor@2.0.so
+
+# Telephony / RIL
+vendor/lib/libmtkrillog.so
+vendor/lib64/libmtkrillog.so
+vendor/lib64/libril_sem.so
+vendor/lib64/librilutils.so
+vendor/lib64/libsecril-client.so
+vendor/lib64/libsec-ril.so
+vendor/bin/hw/rild
+vendor/bin/secril_config_svc
+vendor/etc/init/init.vendor.rilcommon.rc
+vendor/etc/init/vendor.samsung.ril.mediatek.rc

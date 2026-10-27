@@ -61,6 +61,7 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_NO_GCC := true
 TARGET_KERNEL_SOURCE := kernel/samsung/mt6765
+TARGET_KERNEL_CONFIG := gta7lite_defconfig
 
 # Partitions
 BOARD_USES_METADATA_PARTITION := true
@@ -146,6 +147,14 @@ WIFI_DRIVER_STATE_ON := "1"
 WIFI_DRIVER_STATE_OFF := "0"
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
+
+TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_ADDITIONAL_FLAGS := \
+    CROSS_COMPILE=aarch64-linux-gnu- \
+    CLANG_TRIPLE=aarch64-linux-gnu- \
+    LD=ld.lld AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy \
+    OBJDUMP=llvm-objdump STRIP=llvm-strip READELF=llvm-readelf \
+	-k
 
 # Inherit the proprietary files
 include vendor/samsung/mt6765-common/BoardConfigVendor.mk

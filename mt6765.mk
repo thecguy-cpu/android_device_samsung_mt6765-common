@@ -167,7 +167,6 @@ PRODUCT_PACKAGES += \
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service.samsung \
     android.hardware.keymaster@4.0 \
     android.hardware.keymaster@4.1 \
     libkeymaster4.vendor \
@@ -273,8 +272,7 @@ PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.mtkpower@1.1.vendor \
     vendor.mediatek.hardware.mtkpower@1.2-service.stub \
     libmtkperf_client_vendor \
-    libmtkperf_client \
-    libpowerhalwrap_vendor
+    libmtkperf_client 
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
@@ -328,7 +326,6 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-convert-shared.vendor \
     android.hardware.sensors@2.1.vendor \
     android.frameworks.sensorservice@1.0 \
     android.frameworks.sensorservice@1.0.vendor \
@@ -375,11 +372,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.common-V1-ndk_platform.vendor \
     android.hardware.common-V2-ndk_platform.vendor \
-    libbinder-v32 \
     libcrypto-v33 \
     libhidlbase-v32 \
     libstagefright_foundation-v33 \
-    libutils-v32 \
     vndservicemanager
 
 # WiFi
