@@ -1653,6 +1653,8 @@ vendor/lib/libdecrypt.so
 vendor/lib64/libdecrypt.so
 vendor/lib64/libgrdm.so
 vendor/lib64/libkeymaster_helper.so
+system/lib64/libcrypto.so
+system/lib/libcrypto.so
 
 # Light
 vendor/lib/hw/lights.mt6765.so
@@ -1901,3 +1903,6 @@ vendor/bin/hw/rild
 vendor/bin/secril_config_svc
 vendor/etc/init/init.vendor.rilcommon.rc
 vendor/etc/init/vendor.samsung.rilchip.mediatek.rc
+
+# this is for setup-makefiles.sh 
+vendor/lib64/libcrypto-v33.so
