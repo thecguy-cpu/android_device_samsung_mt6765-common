@@ -2,6 +2,10 @@ import /vendor/etc/init/hw/init_connectivity.rc
 import /vendor/etc/init/hw/init.mt6765.power.rc
 import /vendor/etc/init/hw/init.mt6765.usb.rc
 
+# tetophony?  
+import /vendor/etc/init/init.vendor.rilcommon.rc
+import /vendor/etc/init/vendor.samsung.rilchip.mediatek.rc
+
 on early-init
     write /proc/bootprof "INIT:early-init"
     mkdir /mnt/vendor/efs 0771 radio system
@@ -1481,20 +1485,48 @@ service spm_script /vendor/bin/spm_loader
     class core
     oneshot
 
+# Samsung MediaTek RIL Services
+service vendor.ril-daemon-mtk /vendor/bin/hw/rild
+    class main
+    user radio
+    group radio cache inet misc audio sdcard_r sdcard_rw log vpn system readproc wakelock
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW SYS_ADMIN CHOWN SYS_TIME
+    disabled
+
+# Dummy services that ccci_mdinit tries to stop
+service vendor.gsm0710muxd /system/bin/true
+    class core
+    disabled
+    oneshot
+
+service vendor.ril-proxy /system/bin/true
+    class core
+    disabled
+    oneshot
+
+service emdlogger1 /system/bin/true
+    class core
+    disabled
+    oneshot
+
+# Make ccci_mdinit start the modem and the correct RIL
+on property:sys.boot_completed=1
+    start vendor.ril-daemon-mtk
+
+
 # debug fix 
 
 on post-fs-data
-    write /dev/kmsg "DBG: celly has observed that device has started keystore2 at post-fs"
+    write /dev/kmsg "DBG0: celly has observed that device has started keystore2 at post-fs"
     start keystore2
 
 on boot
     write /dev/kmsg "DBG1: celly has observed that device reached on boot in init.mt6765.rc"
     write /dev/kmsg "DBG2: HEHE BRAIN FART =D"
-    write /dev/kmsg "DBG4: celly has observed that class_start core completed"
 
 # Also add a diagnostic that fires when the services actually come up
 on property:init.svc.keystore2=running
-    write /dev/kmsg "DBG5: celly has observed that keystore2 is now running"
+    write /dev/kmsg "DBG3: celly has observed that keystore2 is now running"
 
 on property:init.svc.vendor.keymaster-4-0=running
-    write /dev/kmsg "DBG: celly has observed that HIDL Keymaster 4.0 is running!"
+    write /dev/kmsg "DBG4: celly has observed that HIDL Keymaster 4.0 is running!"
