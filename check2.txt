@@ -1,1 +1,0 @@
-Input file ./proprietary-firmware.txt does not exist!
