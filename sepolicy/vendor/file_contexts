@@ -30,3 +30,9 @@
 /dev/tziwsock                   u:object_r:tz_device:s0
 /dev/tziwshmem                  u:object_r:tz_device:s0
 /dev/grdm                       u:object_r:grdm_device:s0
+
+# keymaster
+(/vendor/bin/hw/android\.hardware\.keymaster@4\.0-service) u:object_r:hal_keymaster_default_exec:s0
+
+# gatekeeper
+/vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.software   u:object_r:hal_gatekeeper_default_exec:s0
