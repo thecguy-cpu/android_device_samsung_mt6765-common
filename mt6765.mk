@@ -41,7 +41,9 @@ PRODUCT_PACKAGES += \
     libnbaio_mono \
     libtinycompress \
     tinymix \
-    libtinyxml
+    libtinyxml \
+    libbase_shim \
+    libutils-v32
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/a2dpsink_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dpsink_audio_policy_configuration.xml \
@@ -112,9 +114,7 @@ PRODUCT_PACKAGES += \
     fastbootd
 
 # Gatekeeper
-PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl \
-    android.hardware.gatekeeper@1.0-service
+  PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-service.software
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -165,20 +165,12 @@ PRODUCT_PACKAGES += \
     libhwbinder \
     libhwbinder.vendor
 
-# Keymaster
+# hidl keymaster
 PRODUCT_PACKAGES += \
-    keystore2 \
-    android.hardware.keymaster@4.0 \
-    android.hardware.keymaster@4.1 \
-    libkeymaster4.vendor \
-    libkeymaster4support.vendor \
-    libkeymaster4_1support.vendor \
-    libkeymaster_messages.vendor \
-    libkeymaster_portable.vendor \
-    libpuresoftkeymasterdevice.vendor \
-    libsoft_attestation_cert.vendor
+    android.hardware.keymaster@4.0-service
 
-$(call soong_config_set,samsungVars,target_keymaster4_library,//vendor/samsung/mt6765-common:libskeymaster4device)
+# use software based ones
+$(call soong_config_set,samsungVars,target_keymaster4_library,//vendor/samsung/mt6765-common:libpuresoftkeymasterdevice)
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -342,7 +334,8 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/lineage/interfaces/power-libperfmgr \
     hardware/mediatek \
     hardware/mediatek/libmtkperf_client \
-    hardware/samsung
+    hardware/samsung \
+    $(LOCAL_PATH)/vndk
 
 # Speed profile services and wifi-service to reduce RAM and storage
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
