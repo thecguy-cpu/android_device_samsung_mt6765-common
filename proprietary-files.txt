@@ -1720,6 +1720,8 @@ vendor/lib64/libthha.so
 vendor/lib64/libvcodec_oal.so
 vendor/lib64/libvcodecdrv_header_stub.so
 vendor/lib64/libvpu5.so
+vendor/lib/libpowerhalwrap_vendor.so
+vnedor/lib64/libpowerhalwrap_vendor.so
 
 # Misc
 vendor/etc/AbnormalDisplayLog_dynamic.xml
