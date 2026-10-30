@@ -67,18 +67,15 @@ function blob_fixup() {
         # replace_needed libcrypto.so -> libcrypto-v33.so
         vendor/lib64/libkeymaster_helper.so | vendor/lib64/libskeymaster4device.so)
             "${PATCHELF}" --replace-needed "libcrypto.so" "libcrypto-v33.so" "${2}"
-            ;;
-
-        # Extract stock system BoringSSL and move to vendor as libcrypto-v33.so
-        system/lib64/libcrypto.so)
-            # $2 is the destination path. Extract the root proprietary folder.
-            ROOT_DIR="${2%/system/lib64/libcrypto.so}"
             
-            # Create the vendor/lib64 directory
-            mkdir -p "${ROOT_DIR}/vendor/lib64"
+            # Extract stock system BoringSSL to vendor
+            VENDOR_DIR=$(dirname "${2}") # e.g., .../proprietary/vendor/lib64
+            # The source dump is relative to the script's ROOT
+            DUMP_DIR="${SRC%/vendor/lib64/libkeymaster_helper.so}"
             
-            # Move and rename the file
-            mv "${2}" "${ROOT_DIR}/vendor/lib64/libcrypto-v33.so"
+            if [ -f "${DUMP_DIR}/system/lib64/libcrypto.so" ]; then
+                cp "${DUMP_DIR}/system/lib64/libcrypto.so" "${VENDOR_DIR}/libcrypto-v33.so"
+            fi
             ;;
             
         # replace_needed libutils.so -> libutils-v32.so (MediaTek PQ)
