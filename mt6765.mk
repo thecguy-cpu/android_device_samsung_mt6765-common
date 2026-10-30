@@ -41,9 +41,7 @@ PRODUCT_PACKAGES += \
     libnbaio_mono \
     libtinycompress \
     tinymix \
-    libtinyxml \
-    libbase_shim \
-    libutils-v32
+    libtinyxml
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/a2dpsink_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dpsink_audio_policy_configuration.xml \
@@ -89,7 +87,7 @@ PRODUCT_PACKAGES += \
     libcamera_metadata.vendor \
     libexif.vendor \
     libstdc++_vendor \
-    libpng.vendor
+    libpng.vendor 
 
 # CAS
 PRODUCT_PACKAGES += \
@@ -171,6 +169,12 @@ PRODUCT_PACKAGES += \
 
 # use software based ones
 $(call soong_config_set,samsungVars,target_keymaster4_library,//vendor/samsung/mt6765-common:libpuresoftkeymasterdevice)
+
+# Shims
+PRODUCT_PACKAGES += \
+    libbase_shim \
+    libutils-v32 \
+    libhidlbase_shim 
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -383,7 +387,8 @@ PRODUCT_PACKAGES += \
     libssl \
     libssl.vendor \
     libwifi-hal-wrapper \
-    wpa_supplicant
+    wpa_supplicant \
+    lib_driver_cmd_mt66xx
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
