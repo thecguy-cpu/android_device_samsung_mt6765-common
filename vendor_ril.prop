@@ -23,4 +23,5 @@ ro.vendor.mtk_world_phone_policy=0
 ro.vendor.num_md_protocol=2
 ro.vendor.pref_scale_enable_cfg=1
 ro.vendor.sim_me_lock_mode=0
+ro.vendor.radio.default_network=9
 vendor.rild.libargs=-d /dev/ttyC0
