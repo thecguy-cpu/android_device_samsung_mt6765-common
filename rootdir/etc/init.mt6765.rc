@@ -977,10 +977,11 @@ on post-fs-data
     # Key Installation
     mkdir /data/vendor/key_provisioning 0771 system system
 
-    # Mount FUSE for /sdcard
+    # just create the folders lol
+    mkdir /mnt/user 0771 root root
+    mkdir /mnt/user/0 0771 root root
     mkdir /mnt/user/0/primary 0700 root root
-    mount -t fuse -o user_id=0,group_id=0,default_permissions,allow_other,rootmode=40000,context=u:object_r:fuse:s0 fuse /storage/emulated/0
-
+    
 on late-fs
     write /proc/bootprof "INIT:late-fs"
     # wait_for_prop hwservicemanager.ready "true"
@@ -1281,6 +1282,9 @@ on boot
     setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
 
     setprop persist.sys.strictmode.disable 1
+
+    # let vold handle it lol
+    class_start vold
 
 service hqreadsvc /vendor/bin/hqread atcmd
     class main
