@@ -162,6 +162,10 @@ on charger
     start fuelgauged
     start fuelgauged_nvram
 
+    # charge screen lol
+    start vendor.health-default
+    class_start charger
+
     chown system system /sys/class/leds/lcd-backlight/brightness
     chown system system /sys/class/leds/red/brightness
     chown system system /sys/class/leds/green/brightness
@@ -972,6 +976,10 @@ on post-fs-data
     # Create /data/vendor/key_provisioning dir and get proper encryption policy installed
     # Key Installation
     mkdir /data/vendor/key_provisioning 0771 system system
+
+    # Mount FUSE for /sdcard
+    mkdir /mnt/user/0/primary 0700 root root
+    mount -t fuse -o user_id=0,group_id=0,default_permissions,allow_other,rootmode=40000,context=u:object_r:fuse:s0 fuse /storage/emulated/0
 
 on late-fs
     write /proc/bootprof "INIT:late-fs"
