@@ -975,7 +975,7 @@ on post-fs-data
 
 on late-fs
     write /proc/bootprof "INIT:late-fs"
-    wait_for_prop hwservicemanager.ready "true"
+    # wait_for_prop hwservicemanager.ready "true"
 
     write /proc/bootprof "INIT:Mount_START --late"
     write /sys/kernel/tracing/trace_marker "B|1|Mount late"
@@ -1468,3 +1468,21 @@ service spm_script /vendor/bin/spm_loader
     group system
     class core
     oneshot
+
+# debug fix 
+
+on post-fs-data
+    write /dev/kmsg "DBG: celly has observed that device has started keystore2 at post-fs"
+    start keystore2
+
+on boot
+    write /dev/kmsg "DBG1: celly has observed that device reached on boot in init.mt6765.rc"
+    write /dev/kmsg "DBG2: HEHE BRAIN FART =D"
+    write /dev/kmsg "DBG4: celly has observed that class_start core completed"
+
+# Also add a diagnostic that fires when the services actually come up
+on property:init.svc.keystore2=running
+    write /dev/kmsg "DBG5: celly has observed that keystore2 is now running"
+
+on property:init.svc.vendor.keymaster-4-0=running
+    write /dev/kmsg "DBG: celly has observed that HIDL Keymaster 4.0 is running!"
