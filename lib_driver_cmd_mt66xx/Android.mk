@@ -35,4 +35,4 @@ LOCAL_CFLAGS := \
     -Wno-unused-parameter \
     -Wno-unused-function
 
-include $(BUILD_STATIC_LIBRARY)
+include $(BUILD_SHARED_LIBRARY)
